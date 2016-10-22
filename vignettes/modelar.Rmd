@@ -1,0 +1,143 @@
+---
+title: "Ajustando um modelo usando captchaReceitaAudio"
+author: "Julio Trecenti"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Ajustando um modelo usando captchaReceitaAudio}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Esse tutorial mostra como fizemos o modelo atual do `captchaReceitaAudio`. Primeiro, instale os pacotes necessários. Os pacotes de captcha não serão colocados no CRAN, logo é necessário instalar via `devtools`.
+
+```{r pkgs, eval=FALSE}
+if (!require(devtools)) install.packages('devtools')
+devtools::install_github('decryptr/captchaReceitaAudio')
+# contém os dados brutos
+devtools::install_github('decryptr/captchaReceitaData')
+```
+
+Acesse os dados usando `system.file`. O nome do arquivo é a transcrição correta do áudio.
+
+```{r arqs}
+arqs <- dir(system.file('audio', package = 'captchaReceitaData'), 
+            full.names = TRUE)
+head(arqs)
+```
+
+Vamos utilizar esse pacote (outros pacotes aparecem com `::`):
+
+```{r pacotes, message=FALSE, warning=FALSE}
+library(captchaReceitaAudio)
+```
+
+## Carregar dados
+
+Cada arquivo de áudio `.wav` pode ser entendido como um vetor de inteiros. Cada componente do vetor indica a frequência em cada unidade de tempo.
+
+```{r ex-audio}
+ler_audio(arqs[1]) %>% head(10)
+```
+
+## Identificar letras
+
+A função `identificar_letras` processa os dados e identifica em quais intervalos de tempo temos letras e em quais temos ruído. No final, temos uma base de dados em que cada linha é uma unidade de tempo e com as seguintes colunas:
+
+- `som`: Frequência observada no instante de tempo.
+- `tempo`: Identificador do instante de tempo.
+- `w0`: XXX.
+- `final`: XXX.
+- `final_diff`: XXX.
+
+Você pode visualizar a base de letras quebradas rodando o código abaixo.
+
+```{r bd-aud}
+set.seed(47)
+d_letras <- arqs %>% sample(1) %>% identificar_letras()
+d_letras %>% dplyr::select(-arq_aud)
+```
+
+É possível verificar se o algoritmo de corte funcionou corretamente usando a função `corte_eh_valido`:
+
+```{r valido}
+d_letras %>% corte_eh_valido()
+```
+
+## Visualizar áudio
+
+A função `visualizar_corte` mostra visualmente os critérios utilizados para corte. As áreas em cinza indicam ruído; a série em preto são as letras identificadas; a linha azul mostra a coluna `w0`. A linha vermelha indica o critério utilizado para selecionar as letras. A linha verde mostra o acumulado de letras e espaços sem letras (geralmente somando 13: seis letras, cinco espaços entre letras e dois espaços nas bordas).
+
+```{r graf, fig.width=7}
+d_letras %>% visualizar_corte()
+```
+
+## Montagem das features para ajuste do modelo
+
+XXX metodologia
+
+```{r montar}
+d_reg <- arqs %>% montar_treino()
+```
+
+## Ajuste do modelo
+
+### Base de treino e base de teste
+
+```{r resample}
+set.seed(47)
+d_reg <- d_reg %>% 
+  # 30% teste, 70% treino
+  modelr::resample_partition(c(train = .7, test = .3))
+
+d_train <- d_reg$train$data %>% 
+  dplyr::slice(d_reg$train$idx)
+
+d_test <- d_reg$test$data %>% 
+  dplyr::slice(d_reg$test$idx)
+```
+
+### Ajuste via random forests
+
+Para ajustar o modelo utilizamos a biblioteca `caret`. O modelo utilizado para ajuste (chamado através do `caret`) são florestas aleatórias, com o pacote `randomForest`. O código abaixo mostra a estratégia utilizada para ajuste do modelo.
+
+```{r model, message=FALSE, warning=FALSE}
+# Controle do modelo
+ctrl <- caret::trainControl(method = "repeatedcv", number = 2, repeats = 4, 
+                            selectionFunction = "oneSE", timingSamps = 3, 
+                            allowParallel = FALSE)
+# Fórmula de classificação
+f <- formula(
+  y ~ comprimento + ataque + ataque2 + ataque3 + som_letra_dp_q1 +
+    som_letra_dp_q2 + som_letra_dp_q3 + som_letra_abs_dp + 
+    som_letra_max_q1 + som_letra_max_q2 + som_letra_max_q3 +
+    som_letra_abs_max_q1 + som_letra_abs_max_q2 + som_letra_dp_p2 +
+    som_letra_max_p2
+)
+# Ajuste
+modelo <- caret::train(f, data = d_train, metric = "Kappa", trControl = ctrl)
+```
+
+### Poder preditivo por letra
+
+Proporção de acertos:
+
+```{r poder}
+d_test %>% 
+  modelr::add_predictions(modelo) %>% 
+  with(mean(y == pred))
+```
+
+A tabela abaixo mostra as classificações do modelo, somente quando houve algum erro. Note que o caso com mais erros ("1") foi confundido com a letra "u".
+
+```{r erros}
+d_test %>% 
+  modelr::add_predictions(modelo) %>% 
+  dplyr::count(y, pred) %>% 
+  dplyr::filter(n != sum(n)) %>% 
+  dplyr::arrange(dplyr::desc(n)) %>% 
+  tidyr::unite(p, pred, n, sep = '=') %>% 
+  dplyr::summarise(res = paste0(p, collapse = ' | ')) %>% 
+  knitr::kable()
+```
+
