@@ -52,25 +52,3 @@ baixar_imgs_audios <- function(nlim = 1000L, esperar = 2.5, dir = "data/captchas
   }
 }
 
-#' Insere novos captchas no data.frame 'captchas'.
-#'
-#' @param dirs vetor de characters com os diretorios contendo os .wav e .png dos captchas.
-#' @param nome_do_bd character Nome do data.frame. O padrao eh 'captcha'.
-#'
-#' @export
-insere_captchas <- function(dirs, nome_do_bd = "captchas") {
-  captchas_novos <- purrr::map(dirs, ~ list.files(.x, pattern = "\\.(wav|png)$")) %>%
-    purrr::reduce(c) %>%
-    stringi::stri_replace_first_regex("\\.(wav|png)$", "") %>%
-    unique %>%
-    dplyr::data_frame(captcha_id = ., resposta = as.character(NA))
-
-  path_do_bd <- sprintf("data/%s.RData", nome_do_bd)
-  load(file = path_do_bd)
-  captchas <- bind_rows(captchas,
-                        captchas_novos %>% anti_join(captchas, by = c("captcha_id", "resposta"))) %>%
-    arrange(resposta) %>%
-    distinct(captcha_id, .keep_all = TRUE)
-  save(captchas, file = path_do_bd)
-}
-

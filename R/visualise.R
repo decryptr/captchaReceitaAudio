@@ -26,7 +26,7 @@ visualizar_imagem <- function(arq_png) {
 #' @import ggplot2
 visualizar_corte <- function(df_com_letras_identificadas) {
   ggplot(df_com_letras_identificadas %>%
-           mutate(eh_letra = final_diff %% 2 != 0), aes(x = tempo)) +
+           dplyr::mutate(eh_letra = final_diff %% 2 != 0), aes(x = tempo)) +
     geom_line(aes(y = scale(som), alpha = eh_letra), show.legend = FALSE) +
     geom_line(aes(y = scale(w0), colour = "w0"), show.legend = FALSE) +
     geom_line(aes(y = scale(final), colour = "final"), show.legend = FALSE) +

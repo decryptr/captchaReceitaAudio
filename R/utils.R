@@ -6,6 +6,7 @@
 #' @export
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
+magrittr::`%>%`
 
 arquivo <- function(x) {
   UseMethod('arquivo')
