@@ -112,9 +112,9 @@ insere_captchas_resposta <- function(dir = "data/captchas_resposta") {
     purrr::map(~.x %>% mutate(arq_aud = as.character(arq_aud))) %>%
     purrr::reduce(bind_rows)
   captchas_resposta %<>%
-    bind_rows(captchas_resposta_novos) %>%
+    dplyr::bind_rows(captchas_resposta_novos) %>%
     dplyr::mutate(resposta = resposta %>% tolower) %>%
-    distinct(arq_aud, final_diff, .keep_all = TRUE)
+    dplyr::distinct(arq_aud, final_diff, .keep_all = TRUE)
   save(captchas_resposta, file = "data/captchas_resposta.RData")
 }
 

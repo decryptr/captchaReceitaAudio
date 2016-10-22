@@ -23,6 +23,7 @@ visualizar_imagem <- function(arq_png) {
 #' @param df_com_letras_identificadas objeto data.frame retornado pela funcao \code{\link{identificar_letras}}.
 #'
 #' @export
+#' @import ggplot2
 visualizar_corte <- function(df_com_letras_identificadas) {
   ggplot(df_com_letras_identificadas %>%
            mutate(eh_letra = final_diff %% 2 != 0), aes(x = tempo)) +
@@ -42,6 +43,7 @@ visualizar_corte <- function(df_com_letras_identificadas) {
 #'
 #'@export
 app_classificador <- function(arq = NULL) {
+  requireNamespace("shiny", quietly = TRUE)
   if (is.null(arq)) arq <- system.file("classificador/app.R",
                                        package = 'captchaReceitaAudio')
   shiny::runApp(arq)

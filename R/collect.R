@@ -63,7 +63,7 @@ insere_captchas <- function(dirs, nome_do_bd = "captchas") {
     purrr::reduce(c) %>%
     stringi::stri_replace_first_regex("\\.(wav|png)$", "") %>%
     unique %>%
-    data_frame(captcha_id = ., resposta = as.character(NA))
+    dplyr::data_frame(captcha_id = ., resposta = as.character(NA))
 
   path_do_bd <- sprintf("data/%s.RData", nome_do_bd)
   load(file = path_do_bd)
