@@ -31,5 +31,5 @@ arq$imagem %>% visualizar_imagem()
 
 ```r 
 arq$audio %>% predizer()
-#> [1] "3dsbjf"
+#> [1] "lk4vd2"
 ```
