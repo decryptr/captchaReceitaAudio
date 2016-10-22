@@ -10,7 +10,9 @@ Encoding: UTF-8
 LazyData: true
 Suggests:
     testthat,
-    shiny
+    shiny,
+    knitr,
+    rmarkdown
 Imports:
     RcppRoll,
     dplyr,
@@ -28,3 +30,4 @@ Imports:
     tuneR,
     readr
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr
