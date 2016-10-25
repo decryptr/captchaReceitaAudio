@@ -1,5 +1,3 @@
-#' Pipe operator
-#'
 #' @name %>%
 #' @rdname pipe
 #' @keywords internal
