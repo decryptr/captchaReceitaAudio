@@ -15,25 +15,25 @@ Suggests:
     rmarkdown,
     captchaReceitaData
 Imports:
-    tidyr,
-    tibble,
-    RcppRoll,
-    e1071,
-    dplyr,
-    stringr,
-    stringi,
-    purrr,
-    png,
-    grid,
-    ggplot2,
-    magrittr,
-    modelr,
     caret,
-    randomForest,
+    dplyr,
+    e1071,
+    ggplot2,
+    grid,
     httr,
     lubridate,
-    tuneR,
-    readr
+    magrittr,
+    modelr,
+    png,
+    purrr,
+    randomForest,
+    RcppRoll,
+    readr,
+    stringi,
+    stringr,
+    tibble,
+    tidyr,
+    tuneR
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 Remotes: decryptr/captchaReceitaData
