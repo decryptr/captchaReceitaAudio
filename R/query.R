@@ -45,6 +45,12 @@ montar_treino_um <- function(x) {
   }
 }
 
+#' montar_treino
+#'
+#' Montar base de treino
+#'
+#' @param arqs vetor de arquivos
+#'
 #' @export
 montar_treino <- function(arqs) {
   arqs %>%
