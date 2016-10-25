@@ -6,6 +6,9 @@
 \usage{
 ataque2_f(x)
 }
+\arguments{
+\item{x}{numerico}
+}
 \description{
 ataque2_f
 }

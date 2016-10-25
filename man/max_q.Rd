@@ -6,6 +6,11 @@
 \usage{
 max_q(x, probs = c(0, 0.25))
 }
+\arguments{
+\item{x}{numerico}
+
+\item{probs}{quantis}
+}
 \description{
 max_q
 }
