@@ -27,6 +27,7 @@ Imports:
     grid,
     ggplot2,
     magrittr,
+    modelr,
     caret,
     randomForest,
     httr,
