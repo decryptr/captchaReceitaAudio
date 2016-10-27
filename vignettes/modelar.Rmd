@@ -34,7 +34,7 @@ library(captchaReceitaAudio)
 
 ## Carregar dados
 
-Cada arquivo de áudio `.wav` pode ser entendido como um vetor de inteiros. Cada componente do vetor indica a frequência em cada unidade de tempo.
+Cada arquivo de áudio `.wav` pode ser entendido como um vetor de inteiros. Cada componente do vetor indica a amplitude em cada unidade de tempo.
 
 ```{r ex-audio}
 ler_audio(arqs[1]) %>% head(10)
@@ -44,11 +44,11 @@ ler_audio(arqs[1]) %>% head(10)
 
 A função `identificar_letras` processa os dados e identifica em quais intervalos de tempo temos letras e em quais temos ruído. No final, temos uma base de dados em que cada linha é uma unidade de tempo e com as seguintes colunas:
 
-- `som`: Frequência observada no instante de tempo.
+- `som`: Amplitude observada no instante de tempo.
 - `tempo`: Identificador do instante de tempo.
-- `w0`: XXX.
-- `final`: XXX.
-- `final_diff`: XXX.
+- `w0`: "Índice" de ruído branco. Quanto maior, mais provável que o instante de tempo faça parte de um período de ruído branco.
+- `final`: Definição final dos períodos do som. Espera-se que 6 desses períodos correspondam às 6 letras do captcha.
+- `final_diff`: Identificação dos períodos do som. As identificações vão de 0 a 12 e os números ímpares correspondem às 6 letras do captcha.
 
 Você pode visualizar a base de letras quebradas rodando o código abaixo.
 
@@ -74,15 +74,29 @@ d_letras %>% visualizar_corte()
 
 ## Montagem das features para ajuste do modelo
 
-XXX metodologia
+O modelo atual usa 20 features no total.
 
-```{r montar}
-d_reg <- arqs %>% montar_treino()
-```
+- `comprimento`: tamanho do som (ou comprimento do vetor de amplitudes).
+- `ataque`: o instante da amplitude máxima.            
+- `ataque2`: o instante de amplitude máxima após o ataque.        
+- `ataque3`: o instante de amplitude máxima antes do ataque.
+- `som_letra_dp_q[1,2,3]`: desvios padrão das amplitudes nos quartis 1, 2 e 3.
+- `som_letra_abs_dp_q[1, 2, 3]`: desvios padrão do absoluto das amplitudes nos quartis 1, 2 e 3.
+- `som_letra_abs_dp`: desvio padrão do absoluto das amplitudes (do som inteiro).   
+- `som_letra_max_q[1, 2, 3]`: amplitude máxima nos quartis 1, 2 e 3.   
+- `som_letra_abs_max_q[1, 2, 3]`: amplitude absoluta máxima nos quartis 1, 2 e 3.
+- `som_letra_dp_p2`: desvio padrão da amplitude no período entre os percentis 35 e 40.
+- `som_letra_abs_dp_p2`: desvio padrão do absoluto da amplitude no período entre os percentis 35 e 40.
+- `som_letra_max_p2`: amplitude máxima no período entre os percentis 35 e 40.
+
 
 ## Ajuste do modelo
 
 ### Base de treino e base de teste
+
+```{r montar}
+d_reg <- arqs %>% montar_treino()
+```
 
 ```{r resample}
 set.seed(47)
