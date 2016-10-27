@@ -1,22 +1,28 @@
 #' dp_q
+#' @param x numerico
+#' @param probs quantis
 dp_q <- function(x, probs = c(0, 0.25)) {
   quantis <- quantile(x = seq.int(length(x)), probs = probs, type = 1)
   x[seq(quantis[1], quantis[2])] %>% sd()
 }
 
 #' max_q
+#' @param x numerico
+#' @param probs quantis
 max_q <- function(x, probs = c(0, 0.25)) {
   quantis <- quantile(x = seq.int(length(x)), probs = probs, type = 1)
   x[seq(quantis[1], quantis[2])] %>% max()
 }
 
 #' ataque2_f
+#' @param x numerico
 ataque2_f <- function(x) {
   x_max <- x %>% which.max()
   x[(x_max + 10):length(x)] %>% which.max()
 }
 
 #' ataque3_f
+#' @param x numerico
 ataque3_f <- function(x) {
   x_max <- x %>% which.max()
   x[1:max(x_max - 10, 1)] %>% which.max()
@@ -45,6 +51,12 @@ montar_treino_um <- function(x) {
   }
 }
 
+#' montar_treino
+#'
+#' Montar base de treino
+#'
+#' @param arqs vetor de arquivos
+#'
 #' @export
 montar_treino <- function(arqs) {
   arqs %>%

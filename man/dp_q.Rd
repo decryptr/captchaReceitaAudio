@@ -6,6 +6,11 @@
 \usage{
 dp_q(x, probs = c(0, 0.25))
 }
+\arguments{
+\item{x}{numerico}
+
+\item{probs}{quantis}
+}
 \description{
 dp_q
 }

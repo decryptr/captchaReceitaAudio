@@ -1,33 +1,39 @@
 Package: captchaReceitaAudio
-Title: Quebra o captcha da Receita usando áudio.
+Title: Quebra o captcha da Receita usando áudio
 Version: 0.0.0.9000
 Authors@R: person("Athos", "Damiani", email = "athos.damiani@gmail.com", role = c("aut", "cre"))
 Description: Quebra o captcha da Receita usando áudio.
 Depends:
     R (>= 3.3.1)
-License: What license is it under?
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests:
-    testthat,
-    shiny,
+    captchaReceitaData,
     knitr,
-    rmarkdown
+    rmarkdown,
+    shiny,
+    testthat
 Imports:
-    RcppRoll,
-    dplyr,
-    stringr,
-    stringi,
-    purrr,
-    png,
-    grid,
-    ggplot2,
-    magrittr,
     caret,
-    randomForest,
+    dplyr,
+    e1071,
+    ggplot2,
+    grid,
     httr,
     lubridate,
-    tuneR,
-    readr
+    magrittr,
+    modelr,
+    png,
+    purrr,
+    randomForest,
+    RcppRoll,
+    readr,
+    stringi,
+    stringr,
+    tibble,
+    tidyr,
+    tuneR
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
+Remotes: decryptr/captchaReceitaData

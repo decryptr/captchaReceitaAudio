@@ -6,6 +6,9 @@
 \usage{
 app_classificador(arq = NULL)
 }
+\arguments{
+\item{arq}{arquivo}
+}
 \description{
 Aplicacao Shiny Classificador de Captchas
 }

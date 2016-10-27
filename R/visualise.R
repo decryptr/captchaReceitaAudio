@@ -41,6 +41,8 @@ visualizar_corte <- function(df_com_letras_identificadas) {
 
 #' Aplicacao Shiny Classificador de Captchas
 #'
+#' @param arq arquivo
+#'
 #'@export
 app_classificador <- function(arq = NULL) {
   requireNamespace("shiny", quietly = TRUE)
