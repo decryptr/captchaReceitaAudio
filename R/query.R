@@ -111,7 +111,7 @@ monta_df <- function(som_letra) {
 #'
 #' @export
 decifra_letra <- function(som_letra) {
-  df <- monta_df()
+  df <- monta_df(som_letra)
   suppressWarnings(suppressMessages(predict(modelo, df, "raw")))
 }
 
