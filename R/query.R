@@ -115,6 +115,12 @@ decifra_letra <- function(som_letra) {
   suppressWarnings(suppressMessages(predict(modelo, df, "raw")))
 }
 
+
+#' Predizer
+#'
+#' @param arq arquivo para predizer
+#'
+#' @export
 predizer <- function(arq) {
   UseMethod('predizer')
 }

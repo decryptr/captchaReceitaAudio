@@ -8,7 +8,7 @@
 criar_df_captchas <- function(dir = 'data-raw') {
   if (!file.exists(dir)) dir.create(dir, recursive = TRUE)
   captchas <- dplyr::data_frame(captcha_id = "", resposta = "")[NULL,]
-  readr::save_rds(captchas, file = sprintf("%s/%s.rds", dir, nome_do_bd))
+  readr::write_rds(captchas, file = sprintf("%s/%s.rds", dir, nome_do_bd))
 }
 
 #' Carrega o sinal .wav no R.
