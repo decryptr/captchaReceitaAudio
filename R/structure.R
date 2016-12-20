@@ -11,6 +11,7 @@ criar_df_captchas <- function(dir = 'data-raw') {
   readr::write_rds(captchas, file = sprintf("%s/%s.rds", dir, nome_do_bd))
 }
 
+
 #' Carrega o sinal .wav no R.
 #'
 #' @param arq_aud character. Caminho/do/audio/do/captcha.wav

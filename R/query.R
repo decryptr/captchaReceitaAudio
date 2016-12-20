@@ -125,6 +125,11 @@ predizer <- function(arq) {
   UseMethod('predizer')
 }
 
+#' Predizer response
+#'
+#' @param arq arquivo para predizer
+#'
+#' @export
 predizer.response <- function(arq) {
   arq$request$output$path %>%
     identificar_letras() %>%
@@ -134,6 +139,11 @@ predizer.response <- function(arq) {
     paste(collapse = '')
 }
 
+#' Predizer response
+#'
+#' @param arq arquivo para predizer
+#'
+#' @export
 predizer.character <- function(arq) {
   arq %>%
     identificar_letras() %>%
