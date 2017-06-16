@@ -14,4 +14,3 @@ dp_q(x, probs = c(0, 0.25))
 \description{
 dp_q
 }
-

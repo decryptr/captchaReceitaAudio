@@ -4,7 +4,7 @@
 \alias{baixar_imgs_audios}
 \title{Laço para baixar imagens e audios dos captchas.}
 \usage{
-baixar_imgs_audios(nlim = 1000L, esperar = 2.5, dir = "data/captchas",
+baixar_imgs_audios(nlim = 1000L, esperar = 2.5, dir = "data-raw/captchas",
   verbose = TRUE)
 }
 \arguments{
@@ -22,4 +22,3 @@ Funcao auxiliar para rodar a funcao \code{baixa_img_audio} repetidamente.
 \details{
 Possivelmente ira dar Timeout no meio.
 }
-

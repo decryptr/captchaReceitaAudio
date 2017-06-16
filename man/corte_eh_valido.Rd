@@ -12,4 +12,3 @@ corte_eh_valido(df_com_letras_identificadas)
 \description{
 Verifica se o corte das 6 letras feitas pela funcao \code{\link{identificar_letras}} foi feita corretamente.
 }
-

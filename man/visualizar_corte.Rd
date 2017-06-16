@@ -13,4 +13,3 @@ visualizar_corte(df_com_letras_identificadas)
 Gera um grafico da onda sonora com as partes identificadas como letras em destaque.
 Serve para verificar se as 6 letras foram identificadas corretamente.
 }
-

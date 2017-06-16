@@ -12,4 +12,3 @@ ler_audio(arq_aud)
 \description{
 Carrega o sinal .wav no R.
 }
-

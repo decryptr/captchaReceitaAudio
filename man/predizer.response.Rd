@@ -12,4 +12,3 @@
 \description{
 Predizer response
 }
-

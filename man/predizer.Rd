@@ -12,4 +12,3 @@ predizer(arq)
 \description{
 Predizer
 }
-
