@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r include=FALSE}
+knitr::opts_chunk$set(eval=FALSE)
+```
+
+
 Esse tutorial mostra como fizemos o modelo atual do `captchaReceitaAudio`. Primeiro, instale os pacotes necessários. Os pacotes de captcha não serão colocados no CRAN, logo é necessário instalar via `devtools`.
 
 ```{r pkgs, eval=FALSE}
