@@ -2,8 +2,8 @@
 #'
 #' Solicita um captcha e grava em disco seu audio.
 #'
-#' @param dir character. (opcional) Diretorio em que se deseja salvar os arquivos.
-#' @param sleep numeric. Tempo esperado para tentar novamente caso ocorra algum problema no download.
+#' @param dest character. (opcional) Diretorio em que se deseja salvar os arquivos.
+#'
 #' @export
 download_audio <- function(dest = NULL) {
 
@@ -39,12 +39,9 @@ download_audio <- function(dest = NULL) {
 #'
 #' Solicita um captcha e grava em disco.
 #'
-#' @param dir character. (opcional) Diretorio em que se deseja salvar os arquivos.
-#' @param sleep numeric. Tempo esperado para tentar novamente caso ocorra algum problema no download.
-#' @export
+#' @param dest character. (opcional) Diretorio em que se deseja salvar os arquivos.
 #'
-
-
+#' @export
 download <- function(dest = NULL) {
 #revisar
   url_solicitacao <- 'http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/cnpjreva_solicitacao2.asp'
@@ -68,13 +65,14 @@ download <- function(dest = NULL) {
 #'
 #' @param nlim integer. Numero limite de captchas para baixar.
 #' @param esperar numeric. Tempo em segundos de espera entre uma chamada da funcao \code{baixa_img_audio} e outra.
-#' @param verbose boolean. Se TRUE (default), informa em qual iteracao esta.
 #' @param dir character. (opcional) Diretorio em que se deseja salvar os arquivos.
+#' @param verbose boolean. Se TRUE (default), informa em qual iteracao esta.
 #'
 #' @export
-baixar_imgs_audios <- function(nlim = 1000L, esperar = 2.5, dir = "data/captchas", verbose = TRUE) {
+baixar_imgs_audios <- function(nlim = 1000L, esperar = 2.5, dir = "data-raw/captchas", verbose = TRUE) {
+  dir.create("data-raw/captchas", showWarnings = FALSE, recursive = TRUE)
   for(i in 1:nlim) {
-    baixa_img_audio(dir)
+    download_audio(dir)
     Sys.sleep(esperar)
     if(verbose) cat(i, "de", nlim, "\n")
   }
