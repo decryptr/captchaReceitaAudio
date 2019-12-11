@@ -4,8 +4,8 @@
 \alias{baixar_imgs_audios}
 \title{Laço para baixar imagens e audios dos captchas.}
 \usage{
-baixar_imgs_audios(nlim = 1000L, esperar = 2.5, dir = "data/captchas",
-  verbose = TRUE)
+baixar_imgs_audios(nlim = 1000L, esperar = 2.5,
+  dir = "data-raw/captchas", verbose = TRUE)
 }
 \arguments{
 \item{nlim}{integer. Numero limite de captchas para baixar.}
