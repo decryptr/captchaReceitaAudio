@@ -15,4 +15,3 @@ Mostra o arquivo PNG do captcha.
 \details{
 Funciona bem com o objeto retornado pela funcao \code{\link{baixar_imgs_audios}}: \code{<obj>$imagem$request$output$path}
 }
-

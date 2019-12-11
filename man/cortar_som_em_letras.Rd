@@ -13,4 +13,3 @@ cortar_som_em_letras(df_com_letras_identificadas)
 Retorna um data.frame cujas linhas sao informacoes relacinadas as letras.
 O corte eh baseado nas identificacoes feitas pela funcao \code{\link{identificar_letras}}.
 }
-

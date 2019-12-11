@@ -12,4 +12,3 @@ criar_df_captchas(dir = "data-raw")
 \description{
 Cria o data.frame 'captchas' com a estrutura predefinida para ser preenchido com a resposta posteriormente.
 }
-

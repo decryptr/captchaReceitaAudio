@@ -12,4 +12,3 @@ decifra_letra(som_letra)
 \description{
 Decifra uma letra individual a partir de um pedaco de audio correspondente a um caracter.
 }
-

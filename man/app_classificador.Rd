@@ -12,4 +12,3 @@ app_classificador(arq = NULL)
 \description{
 Aplicacao Shiny Classificador de Captchas
 }
-

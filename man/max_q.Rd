@@ -14,4 +14,3 @@ max_q(x, probs = c(0, 0.25))
 \description{
 max_q
 }
-

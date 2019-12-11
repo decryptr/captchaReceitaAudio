@@ -12,4 +12,3 @@ montar_treino(arqs)
 \description{
 Montar base de treino
 }
-

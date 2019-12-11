@@ -12,4 +12,3 @@ cria_data_frame_captchas_resposta(nome_do_bd = "captchas_resposta")
 \description{
 Cria o data.frame 'captchas_resposta' com a estrutura predefinida.
 }
-

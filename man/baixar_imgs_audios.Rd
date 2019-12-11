@@ -22,4 +22,3 @@ Funcao auxiliar para rodar a funcao \code{baixa_img_audio} repetidamente.
 \details{
 Possivelmente ira dar Timeout no meio.
 }
-

@@ -12,4 +12,3 @@ ataque2_f(x)
 \description{
 ataque2_f
 }
-

@@ -12,4 +12,3 @@ insere_captchas_resposta(dir = "data/captchas_resposta")
 \description{
 Insere novos captchas com resposta no data.frame 'captchas_resposta'.
 }
-

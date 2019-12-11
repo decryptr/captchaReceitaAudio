@@ -12,4 +12,3 @@ identificar_letras(arq_aud)
 \description{
 Identifica qual parte do sinal da onda sonora do arquivo .wav corresponde as letras do captcha.
 }
-

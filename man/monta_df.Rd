@@ -12,4 +12,3 @@ monta_df(som_letra)
 \description{
 Monta uma base de dados de treino para cada letra.
 }
-

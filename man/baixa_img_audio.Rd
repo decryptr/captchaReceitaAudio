@@ -14,4 +14,3 @@ baixa_img_audio(dir = "data-raw/captchas", sleep = 3)
 \description{
 Solicita um captcha e grava em disco sua imagem e seu audio.
 }
-

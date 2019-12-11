@@ -14,4 +14,3 @@ insere_captchas(dirs, nome_do_bd = "captchas")
 \description{
 Insere novos captchas no data.frame 'captchas'.
 }
-
